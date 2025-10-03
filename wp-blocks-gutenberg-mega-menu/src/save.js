@@ -1,14 +1,7 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 
-export default function save( { attributes } ) {
-	const { columns } = attributes;
-	return (
-		<div
-			{ ...useBlockProps.save( {
-				className: `has-${ columns }-columns`,
-			} ) }
-		>
-			<InnerBlocks.Content />
-		</div>
-	);
+export default function save() {
+    // Return only InnerBlocks content
+    // The actual menu rendering happens in PHP render_callback
+    return <InnerBlocks.Content />;
 }

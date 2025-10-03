@@ -5,10 +5,10 @@ import { useSelect } from '@wordpress/data';
 export default function Edit({ attributes, setAttributes, context }) {
 	const { id } = attributes;
 
-	// Grab menuId from parent context (the parent Mega Menu block)
+	// Parent passes menuId via context
 	const { menuId } = context['gutenberg-mega-menu/menu'] || { menuId: 0 };
 
-	// Get menu items for that menu
+	// Fetch menu items for this menu
 	const items = useSelect(
 		(select) =>
 			menuId
@@ -35,15 +35,14 @@ export default function Edit({ attributes, setAttributes, context }) {
 							})),
 						]}
 						onChange={(value) => setAttributes({ id: parseInt(value, 10) })}
-						help="Choose which menu item this content belongs to."
 					/>
 				</PanelBody>
 			</InspectorControls>
 
 			<p>
-				Attach content to:{" "}
+				Attach content to:{' '}
 				<strong>
-					{items?.find((item) => item.id === id)?.title?.rendered || "Not set"}
+					{items?.find((item) => item.id === id)?.title?.rendered || 'Not set'}
 				</strong>
 			</p>
 
@@ -53,7 +52,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 					'core/columns',
 					'core/column',
 					'core/separator',
-					'core/image',
+					'core/image'
 				]}
 			/>
 		</div>
