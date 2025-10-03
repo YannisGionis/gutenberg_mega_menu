@@ -1,20 +1,69 @@
 {
+  "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "gutenberg-mega-menu/menu-link",
-  "title": "Mega Menu Item",
-  "parent": ["gutenberg-mega-menu/menu"],
-  "category": "widgets",
-  "icon": "admin-links",
-  "description": "Attach dropdown content to a specific menu item.",
+  "name": "gutenberg-mega-menu/mega-menu",
+  "title": "Gutenberg Mega Menu",
+  "category": "design",
+  "icon": "menu",
+  "description": "A desktop-only mega menu with groups, columns, separators, and custom menu items.",
+  "keywords": ["mega menu", "navigation", "menu"],
   "supports": {
+    "align": ["wide", "full"],
     "html": false
   },
+  "textdomain": "gutenberg-mega-menu",
+
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css",
+
   "attributes": {
-    "id": {
+    "menuId": {
       "type": "number",
       "default": 0
     }
   },
-  "usesContext": ["gutenberg-mega-menu/menu"],
-  "editorScript": "file:../../build/menu-link.js"
+
+  "usesContext": [ "postId", "postType" ],
+
+  "providesContext": {
+    "gutenberg-mega-menu/menuId": "menuId"
+  },
+
+  "example": {
+    "attributes": {
+      "menuId": 0
+    },
+    "innerBlocks": [
+      {
+        "name": "core/group",
+        "innerBlocks": [
+          {
+            "name": "core/columns",
+            "innerBlocks": [
+              {
+                "name": "core/column",
+                "innerBlocks": [
+                  {
+                    "name": "gutenberg-mega-menu/menu-link",
+                    "attributes": {
+                      "label": "Example Menu Item",
+                      "url": "#"
+                    }
+                  },
+                  { "name": "core/separator" },
+                  {
+                    "name": "core/image",
+                    "attributes": {
+                      "url": "https://picsum.photos/200"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
